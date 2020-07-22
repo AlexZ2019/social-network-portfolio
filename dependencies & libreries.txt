@@ -1,10 +1,13 @@
 libreries & dependencies 
 
-1) yarn
+1) yarn (npm install -g yarn)
 2) redux
 3) react-redux
 4) redux-thunk
 5) reselect
 6) axios
 7) redux-form
-8) 
+8) gh-pages
+9) react-test-renderer
+10) bootstrap
+11) react-router-dom (npm i react-roter-dom --save)
