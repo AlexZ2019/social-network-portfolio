@@ -1,0 +1,10 @@
+libreries & dependencies 
+
+1) yarn
+2) redux
+3) react-redux
+4) redux-thunk
+5) reselect
+6) axios
+7) redux-form
+8) 
