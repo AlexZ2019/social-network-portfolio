@@ -1,4 +1,4 @@
-
+import {reset} from "redux-form";
 
 const ADD_MESSAGE = "src/Redux/Reducers/DialogReducer/ADD_MESSAGE/"
 const DELETE_DIALOG = "src/Redux/Reducers/DialogReducer/DELETE_DIALOG/"
@@ -48,15 +48,18 @@ const DialogReducer = (state=initialState, action) => {
 let addMessageSuccess = (newMessage) => {
     return {type: ADD_MESSAGE, newMessage}
 }
+
 let deleteDialogSuccess = (dialog) => {
     return {type: DELETE_DIALOG, dialog}
 }
 //Thunk creators
 export let addMessage = newMessage => dispatch => {
-    console.log(newMessage)
     dispatch(addMessageSuccess(newMessage))
+    dispatch(reset("dialogForm"))
 }
+
 export let deleteDialog = dialog => dispatch => {
     dispatch(deleteDialogSuccess(dialog))
 }
+
 export default DialogReducer
