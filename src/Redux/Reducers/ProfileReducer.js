@@ -56,7 +56,6 @@ export const addPost = newPost => dispatch => {
 }
 export const deletePost = postId => dispatch => {
     dispatch(deletePostSuccess(postId))
-    debugger
 }
 
 export default ProfileReducer
