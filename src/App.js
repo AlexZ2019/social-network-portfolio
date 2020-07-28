@@ -9,11 +9,13 @@ import UsersContainer from "./Components/Users/UsersContainer";
 class App extends React.Component {
     render() {
         return (
-            <div className="App">
-                <Menu/>
-                <Route path={"/profile"} render={() => <ProfileContainer/>}/>
-                <Route path={"/dialogs"} render={() => <DialogsContainer/>}/>
-                <Route path={"/users"} render={() => <UsersContainer/>}/>
+            <div className="App container-fluid">
+                <div className="row">
+                    <Menu/>
+                    <Route path={"/profile"} render={() => <ProfileContainer/>}/>
+                    <Route path={"/dialogs"} render={() => <DialogsContainer/>}/>
+                    <Route path={"/users"} render={() => <UsersContainer/>}/>
+                </div>
             </div>
         );
     }

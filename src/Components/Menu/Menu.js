@@ -1,10 +1,10 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import s from "./Menu.css"
 
 const Menu = () => {
 
-    return <>
-        <div className={ ""}>
+    return <div className={"col-4"}>
             <ul>
                 <li>
                     <NavLink to={"/news"}>
@@ -33,7 +33,6 @@ const Menu = () => {
                 </li>
             </ul>
         </div>
-    </>
 }
 
 export default Menu

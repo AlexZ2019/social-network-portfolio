@@ -4,12 +4,14 @@ import ProfileReducer from "./Reducers/ProfileReducer";
 import { reducer as formReducer } from 'redux-form'
 import DialogsReducer from "./Reducers/DialogsReducer";
 import UsersReducer from "./Reducers/UsersReducer";
+import IsFetchingReducer from "./Reducers/IsFetchingReducer";
 
 const reducers = combineReducers({
     ProfileReducer,
     form: formReducer,
     DialogsReducer,
-    UsersReducer
+    UsersReducer,
+    IsFetchingReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleWare))
