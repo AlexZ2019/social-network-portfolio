@@ -1,11 +1,11 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import defaultAvatar from "../../files/images/User_Avatar.png"
-import s from "./Users.css"
+import s from "./Users.module.css"
 
 const User = ({user}, {...props}) => {
     return <div className={s["user"]} key={user.id}>
-        <NavLink to={'/profile/'}>
+        <NavLink to={"/profile/" + user.id}>
             <img src={user.photos.small !== null ? user.photos.small : defaultAvatar} alt=""/>
         </NavLink>
         <span>

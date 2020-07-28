@@ -18,6 +18,6 @@ export const getPageSize = (state) => {
     return state.UsersReducer.pageSize
 }
 
-export const getPortionPagesSize = (state) => {
-    return state.UsersReducer.portionPagesSize
+export const getPortionPageSize = (state) => {
+    return state.UsersReducer.portionPageSize
 }

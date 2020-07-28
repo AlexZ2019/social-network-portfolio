@@ -2,7 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     getCurrentPage,
-    getPageSize, getPortionPagesSize,
+    getPageSize,
+    getPortionPageSize,
     getSubscribed,
     getTotalUserCount,
     getUsersFromState
@@ -34,7 +35,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: getTotalUserCount(state),
         currentPage: getCurrentPage(state),
         pageSize: getPageSize(state),
-        portionPagesSize: getPortionPagesSize(state)
+        portionPageSize: getPortionPageSize(state)
     }
 }
 

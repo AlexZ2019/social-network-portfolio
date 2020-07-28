@@ -1,6 +1,6 @@
 import React from "react";
 import User from "./User";
-import s from "./Users.css"
+import s from "./Users.module.css"
 import Pagination from "../Common/Pagination/Pagination";
 
 

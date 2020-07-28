@@ -19,3 +19,9 @@ export const UsersApI = {
 export const AuthorizationApI = {
 
 }
+
+export const ProfileAPI = {
+    getProfile (userId) {
+        return instance.get(`profile/${userId}`)
+    }
+}

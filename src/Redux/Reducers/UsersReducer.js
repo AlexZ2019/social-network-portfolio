@@ -9,7 +9,7 @@ let initialState = {
     totalUsersCount: null,
     pageSize: 20,
     currentPage: 1,
-    portionPagesSize: 10,
+    portionPageSize: 10,
     subscribed: false
 }
 
