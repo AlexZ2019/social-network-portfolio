@@ -1,6 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getSubscribed, getUsersFromState} from "../../Redux/Selectors/UsersSelector";
+import {
+    getCurrentPage,
+    getPageSize, getPortionPagesSize,
+    getSubscribed,
+    getTotalUserCount,
+    getUsersFromState
+} from "../../Redux/Selectors/UsersSelector";
 import {getUsers} from "../../Redux/Reducers/UsersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
@@ -8,7 +14,7 @@ import Preloader from "../Common/Preloader/Preloader";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers()
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     render() {
@@ -24,7 +30,11 @@ let mapStateToProps = (state) => {
     return {
         users: getUsersFromState(state),
         subscribed: getSubscribed(state),
-        isFetching: state.IsFetchingReducer.isFetching
+        isFetching: state.IsFetchingReducer.isFetching,
+        totalUsersCount: getTotalUserCount(state),
+        currentPage: getCurrentPage(state),
+        pageSize: getPageSize(state),
+        portionPagesSize: getPortionPagesSize(state)
     }
 }
 

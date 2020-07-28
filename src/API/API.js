@@ -9,9 +9,13 @@ const instance = axios.create({
 })
 
 export const UsersApI = {
-    getUsersRequest() {
-        return instance.get(`users?page=${1}&count=${10}`).then(response => {
+    getUsersRequest(currentPage, pageSize) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
             return response.data
         })
     }
+}
+
+export const AuthorizationApI = {
+
 }

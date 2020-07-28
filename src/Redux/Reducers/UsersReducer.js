@@ -7,7 +7,10 @@ const SET_TOTAL_USERS_COUNT = "src/Redux/Reducers/UsersReducer/SET_TOTAL_USERS_C
 let initialState = {
     users: [],
     totalUsersCount: null,
-    subscribed: false,
+    pageSize: 20,
+    currentPage: 1,
+    portionPagesSize: 10,
+    subscribed: false
 }
 
 const UserReducer = (state= initialState, action) => {
@@ -41,9 +44,9 @@ const setTotalUsersCount = (totalUsersCount) => {
 
 
 // Thunk creator
-export const getUsers = () => async dispatch => {
+export const getUsers = (currentPage, pageSize) => async dispatch => {
     dispatch(isFetching(true))
-    let data = await UsersApI.getUsersRequest()
+    let data = await UsersApI.getUsersRequest(currentPage, pageSize)
     dispatch(isFetching(false))
     dispatch(getUsersSuccess(data.items))
     dispatch(setTotalUsersCount(data.totalCount))
