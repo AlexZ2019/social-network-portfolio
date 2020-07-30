@@ -20,12 +20,12 @@ const NewPostFormRedux = reduxForm({
 let ProfilePosts = (props) => {
 
     return (
-        <>
+        <div className={"col-8"}>
             <NewPostFormRedux onSubmit={props.onPostSubmit}/>
             {props.posts.map(item => <Post deletePost={props.deletePost}
                 item={item}
                 key={item.postId}/>)}
-        </>
+        </div>
     )
 }
 

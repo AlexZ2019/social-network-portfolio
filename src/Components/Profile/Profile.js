@@ -10,8 +10,11 @@ const Profile = (props) => {
     }
     return (
         <>
-            <ProfileInfo profile={props.profile}/>
-            <ProfilePostsContainer />
+            <ProfileInfo profile={props.profile}
+                         profileStatus={props.profileStatus}
+                         updateProfileStatus={props.updateProfileStatus}
+            />
+            <ProfilePostsContainer/>
         </>
     )
 }

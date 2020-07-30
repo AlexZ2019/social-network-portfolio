@@ -1,7 +1,7 @@
 import React from "react";
 
 const Post = (props) => {
-    return <div>
+    return <div className={"col-8"}>
         <img src="" alt=""/>
         {props.item.post}
         <button onClick={() => props.deletePost(props.item.postId)}>

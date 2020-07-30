@@ -5,6 +5,7 @@ import {isFetching} from "./IsFetchingReducer";
 const ADD_POST = "src/Redux/Reducers/ProfileReducer/ADD_POST"
 const DELETE_POST = "src/Redux/Reducers/ProfileReducer/DELETE_POST"
 const SET_PROFILE = "src/Redux/Reducers/ProfileReducer/SET_PROFILE"
+const SET_PROFILE_STATUS = "src/Redux/Reducers/ProfileReducer/SET_PROFILE_STATUS"
 
 let initialState = {
     posts: [
@@ -19,7 +20,8 @@ let initialState = {
         {postId: 9, post: "post 9", postData: "22.07.2020", postTime: "12:51"},
         {postId: 10, post: "post 10", postData: "22.07.2020", postTime: "12:51"}
     ],
-    profile: null
+    profile: null,
+    profileStatus: null
 }
 
 const ProfileReducer = (state = initialState, action) => {
@@ -40,6 +42,12 @@ const ProfileReducer = (state = initialState, action) => {
                 ...state, profile: action.profile
             }
         }
+        case SET_PROFILE_STATUS: {
+            return {
+                ...state, profileStatus: action.profileStatus
+            }
+        }
+
         default:
             return state
     }
@@ -51,6 +59,7 @@ const addPostSuccess = (newPost) => {
         {type: ADD_POST, newPost}
     )
 }
+
 const deletePostSuccess = (postId) => {
     return (
         {type: DELETE_POST, postId}
@@ -61,6 +70,13 @@ const setProfile = (profile) => {
     return (
         {type: SET_PROFILE, profile}
     )
+}
+
+const setProfileStatus = profileStatus => {
+    return {
+        type: SET_PROFILE_STATUS,
+        profileStatus
+    }
 }
 
 //Thunk creators
@@ -78,6 +94,18 @@ export const getProfile = userId => async dispatch => {
     let response = await ProfileAPI.getProfile(userId)
     dispatch (isFetching(false))
     dispatch(setProfile(response.data))
+}
+
+export const getProfileStatus = userId => async dispatch => {
+    let response = await ProfileAPI.getProfileStatus(userId)
+    dispatch(setProfileStatus(response.data))
+}
+
+export const updateProfileStatus = profileStatus => async dispatch => {
+    let response = await ProfileAPI.updateProfileStatus(profileStatus)
+    if (response.data.resultCode === 0) {
+        dispatch(setProfileStatus(profileStatus))
+    }
 }
 
 export default ProfileReducer

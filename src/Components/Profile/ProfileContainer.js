@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import {compose} from "redux";
 import {withRouter} from "react-router";
-import {getProfile} from "../../Redux/Reducers/ProfileReducer";
-import {getProfileFromState} from "../../Redux/Selectors/ProfileSelector";
+import {getProfile, getProfileStatus, updateProfileStatus} from "../../Redux/Reducers/ProfileReducer";
+import {getProfileFromState, getProfileStatusFromState} from "../../Redux/Selectors/ProfileSelector";
 import {getAuthUserIdFromState} from "../../Redux/Selectors/AuthSelector";
 
 
@@ -19,21 +19,27 @@ class ProfileContainer extends React.Component {
             }
         }
         this.props.getProfile(userId)
+        this.props.getProfileStatus(userId)
+
     }
 
     render() {
-        return <Profile profile={this.props.profile} />
+        return <Profile profile={this.props.profile}
+                        profileStatus={this.props.profileStatus}
+                        updateProfileStatus={this.props.updateProfileStatus}
+            />
     }
 }
 
 let mapStateToProps = (state) => {
     return {
         profile: getProfileFromState(state),
-        userId: getAuthUserIdFromState(state)
+        userId: getAuthUserIdFromState(state),
+        profileStatus: getProfileStatusFromState(state)
     }
 }
 
 export default compose (
-    connect(mapStateToProps, {getProfile}),
+    connect(mapStateToProps, {getProfile, getProfileStatus, updateProfileStatus}),
     withRouter
 )(ProfileContainer)

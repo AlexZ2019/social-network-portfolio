@@ -5,3 +5,7 @@ export const getPostsFromState = (state) => {
 export const getProfileFromState = (state) => {
     return state.ProfileReducer.profile
 }
+
+export const getProfileStatusFromState = (state) => {
+    return state.ProfileReducer.profileStatus
+}

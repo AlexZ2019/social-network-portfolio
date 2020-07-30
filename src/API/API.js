@@ -17,13 +17,21 @@ export const UsersApI = {
 }
 
 export const AuthorizationApI = {
-    getAuthMe () {
+    getAuthMe() {
         return instance.get(`auth/me`)
     }
 }
 
 export const ProfileAPI = {
-    getProfile (userId) {
+    getProfile(userId) {
         return instance.get(`profile/${userId}`)
+    },
+
+    getProfileStatus(userId) {
+        return instance.get(`profile/status/` + userId)
+    },
+
+    updateProfileStatus(status) {
+        return instance.put(`profile/status/`, {status})
     }
 }
