@@ -3,6 +3,5 @@ export const getPostsFromState = (state) => {
 }
 
 export const getProfileFromState = (state) => {
-    console.log(state.ProfileReducer.profile)
     return state.ProfileReducer.profile
 }

@@ -3,7 +3,7 @@ export const getIsAuthFromState = (state) => {
 }
 
 export const getAuthUserIdFromState = (state) => {
-    return state.AuthReducer.UserId
+    return state.AuthReducer.userId
 }
 
 export const getAuthEmailFromState = (state) => {

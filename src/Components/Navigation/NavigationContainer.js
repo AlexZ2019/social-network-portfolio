@@ -17,7 +17,6 @@ class NavigationContainer extends React.Component{
 }
 
 let mapStateToProps = (state) => {
-    debugger
     return {
         isAuth: getIsAuthFromState(state),
         login: getAuthLoginFromState(state)
