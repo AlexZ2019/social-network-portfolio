@@ -1,0 +1,54 @@
+import {AuthorizationApI} from "../../API/API";
+
+const SET_IS_AUTH = "src/Redux/Reducers/AuthReducer/SET_IS_AUTH"
+const SET_AUTH_DATA = "src/Redux/Reducers/AuthReducer/SET_AUTH_DATA"
+
+let initialState = {
+    isAuth: false,
+    userId: null,
+    login: null,
+    email:null
+}
+
+const AuthReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case SET_IS_AUTH:
+            return {
+                ...state, isAuth: action.isAuth
+            }
+        case SET_AUTH_DATA:
+            return {
+                ...state, ...action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// Action Creators
+const setIsAuth = (isAuth) => {
+    return {
+        type: SET_IS_AUTH,
+        isAuth
+    }
+}
+
+const setAuthData = (userId, email, login) => {
+    console.log(userId, email, login)
+    return {
+        type: SET_AUTH_DATA,
+        payload: {userId, email, login}
+    }
+}
+
+// Thunk creators
+export const getAuth = () => async dispatch => {
+    let response = await AuthorizationApI.getAuthMe()
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        dispatch(setIsAuth(true))
+        dispatch(setAuthData(id, email, login))
+    }
+}
+
+export default AuthReducer

@@ -9,7 +9,7 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.photos.large ? props.profile.photos.large : defaultAvatar} alt=""/>
             </div>
             <div>{props.profile.fullName}</div>
-            <div>profile.aboutMe</div>
+            <div>{props.profile.aboutMe}</div>
         </div>
     )
 }

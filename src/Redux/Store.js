@@ -5,13 +5,15 @@ import { reducer as formReducer } from 'redux-form'
 import DialogsReducer from "./Reducers/DialogsReducer";
 import UsersReducer from "./Reducers/UsersReducer";
 import IsFetchingReducer from "./Reducers/IsFetchingReducer";
+import AuthReducer from "./Reducers/AuthReducer";
 
 const reducers = combineReducers({
     ProfileReducer,
     form: formReducer,
     DialogsReducer,
     UsersReducer,
-    IsFetchingReducer
+    IsFetchingReducer,
+    AuthReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleWare))

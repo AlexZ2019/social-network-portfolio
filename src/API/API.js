@@ -17,7 +17,9 @@ export const UsersApI = {
 }
 
 export const AuthorizationApI = {
-
+    getAuthMe () {
+        return instance.get(`auth/me`)
+    }
 }
 
 export const ProfileAPI = {
