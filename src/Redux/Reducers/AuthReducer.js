@@ -34,7 +34,7 @@ const setIsAuth = (isAuth) => {
 }
 
 const setAuthData = (userId, email, login) => {
-    console.log(userId, email, login)
+    // console.log(userId, email, login)
     return {
         type: SET_AUTH_DATA,
         payload: {userId, email, login}
@@ -51,4 +51,17 @@ export const getAuth = () => async dispatch => {
     }
 }
 
+export const getLogin = (email, password, rememberMe) => async dispatch => {
+    let response = await AuthorizationApI.login(email, password, rememberMe);
+    if (response.data.resultCode === 0) {
+        dispatch(getAuth());
+    }
+}
+
+export const getLogout = () => async dispatch => {
+    let response = await AuthorizationApI.logout();
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthData(null, null, null))
+    }
+}
 export default AuthReducer
