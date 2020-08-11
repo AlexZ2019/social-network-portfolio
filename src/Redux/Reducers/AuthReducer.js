@@ -1,4 +1,5 @@
 import {AuthorizationApI} from "../../API/API";
+import {stopSubmit} from "redux-form";
 
 const SET_IS_AUTH = "src/Redux/Reducers/AuthReducer/SET_IS_AUTH"
 const SET_AUTH_DATA = "src/Redux/Reducers/AuthReducer/SET_AUTH_DATA"
@@ -55,6 +56,9 @@ export const getLogin = (email, password, rememberMe) => async dispatch => {
     let response = await AuthorizationApI.login(email, password, rememberMe);
     if (response.data.resultCode === 0) {
         dispatch(getAuth());
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+        dispatch(stopSubmit("loginForm", {_error: message}))
     }
 }
 

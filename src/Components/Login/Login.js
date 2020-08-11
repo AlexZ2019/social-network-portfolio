@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {getLogin} from "../../Redux/Reducers/AuthReducer";
 import {checkValueLength, required} from "../../Tools/Validation/AuthValidator";
 import {Input} from "../../Tools/Fields/CreateFields";
+import {getIsAuthFromState} from "../../Redux/Selectors/AuthSelector";
+import {Redirect} from "react-router";
 
 
 const checkValueLength_4_20 = checkValueLength(4, 20)
@@ -22,6 +24,11 @@ const LoginFormRedux = reduxForm({
 })(LoginForm)
 
 const Login = (props) => {
+
+    // if (props.isAuth) {
+    //     return <Redirect to={"/profile"}/>
+    // }
+
     const getAuthorized = (values) => {
         props.getLogin(values.email, values.password, values.rememberMe)
     }
@@ -29,6 +36,11 @@ const Login = (props) => {
     return <LoginFormRedux onSubmit={getAuthorized}/>
 }
 
+let mapStateToProps = (state) => {
+    return {
+        isAuth: getIsAuthFromState(state)
+    }
+}
 
 
-export default connect(null, {getLogin})(Login)
+export default connect(mapStateToProps, {getLogin})(Login)

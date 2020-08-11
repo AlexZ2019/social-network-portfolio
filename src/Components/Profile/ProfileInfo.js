@@ -1,7 +1,6 @@
 import React from "react";
 import defaultAvatar from "../../files/images/User_Avatar.png"
 import ProfileInfoStatus from "./ProfileInfoStatus";
-import ProfilePostsContainer from "./Posts/ProfilePostsContainer";
 
 const ProfileInfo = (props) => {
 

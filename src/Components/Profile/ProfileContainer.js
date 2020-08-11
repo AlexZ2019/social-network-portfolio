@@ -7,20 +7,17 @@ import {getProfile, getProfileStatus, updateProfileStatus} from "../../Redux/Red
 import {getProfileFromState, getProfileStatusFromState} from "../../Redux/Selectors/ProfileSelector";
 import {getAuthUserIdFromState} from "../../Redux/Selectors/AuthSelector";
 
-
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.userId
-
             if (!userId) {
                 this.props.history.push("/login")
             }
         }
         this.props.getProfile(userId)
         this.props.getProfileStatus(userId)
-
     }
 
     render() {
