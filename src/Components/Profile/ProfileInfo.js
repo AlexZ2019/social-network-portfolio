@@ -2,7 +2,7 @@ import React from "react";
 import defaultAvatar from "../../files/images/User_Avatar.png"
 import ProfileInfoStatus from "./ProfileInfoStatus";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = React.memo(props => {
 
     return (
         <div>
@@ -16,5 +16,5 @@ const ProfileInfo = (props) => {
         </div>
     )
 }
-
+)
 export default ProfileInfo

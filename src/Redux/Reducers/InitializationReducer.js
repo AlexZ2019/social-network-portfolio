@@ -1,4 +1,5 @@
-import {getAuth} from "./AuthReducer";
+import AuthReducer, {getAuth} from "./AuthReducer";
+import {getProfile} from "./ProfileReducer";
 
 const INITIALIZE = "InitializationReducer/INITIALIZE"
 
@@ -19,8 +20,8 @@ const InitializationReducer = (state = InitialState, action) => {
 
 const initializedSuccess = () => ({type: INITIALIZE})
 
-export const getInitialize = () => dispatch => {
-    let promise = dispatch(getAuth());
+export const getInitialize = () => (dispatch, getState) => {
+    let promise = dispatch(getAuth())
     Promise.all([promise]).then(() => {
             dispatch(initializedSuccess())
         }

@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import ProfilePosts from "./ProfilePosts";
 import {connect} from "react-redux";
 import {addPost, deletePost} from "../../../Redux/Reducers/ProfileReducer";
 import {getPostsFromState} from "../../../Redux/Selectors/ProfileSelector";
 
-class ProfilePostsContainer extends Component{
+class ProfilePostsContainer extends PureComponent{
     onPostSubmit = (values) => {
         this.props.addPost(values.newPost)
     }
