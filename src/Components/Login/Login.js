@@ -25,9 +25,9 @@ const LoginFormRedux = reduxForm({
 
 const Login = (props) => {
 
-    // if (props.isAuth) {
-    //     return <Redirect to={"/profile"}/>
-    // }
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
 
     const getAuthorized = (values) => {
         props.getLogin(values.email, values.password, values.rememberMe)

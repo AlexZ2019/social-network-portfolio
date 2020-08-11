@@ -6,6 +6,7 @@ import DialogsReducer from "./Reducers/DialogsReducer";
 import UsersReducer from "./Reducers/UsersReducer";
 import IsFetchingReducer from "./Reducers/IsFetchingReducer";
 import AuthReducer from "./Reducers/AuthReducer";
+import InitializationReducer from "./Reducers/InitializationReducer";
 
 const reducers = combineReducers({
     ProfileReducer,
@@ -13,7 +14,8 @@ const reducers = combineReducers({
     DialogsReducer,
     UsersReducer,
     IsFetchingReducer,
-    AuthReducer
+    AuthReducer,
+    InitializationReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleWare))

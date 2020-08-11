@@ -8,7 +8,8 @@ import {getProfileFromState, getProfileStatusFromState} from "../../Redux/Select
 import {getAuthUserIdFromState} from "../../Redux/Selectors/AuthSelector";
 
 class ProfileContainer extends React.Component {
-    componentDidMount() {
+
+    updateProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.userId
@@ -18,6 +19,16 @@ class ProfileContainer extends React.Component {
         }
         this.props.getProfile(userId)
         this.props.getProfileStatus(userId)
+    }
+
+    componentDidMount() {
+        this.updateProfile()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.profile !== this.props.profile) {
+            this.updateProfile()
+        }
     }
 
     render() {

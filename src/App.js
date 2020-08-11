@@ -7,9 +7,20 @@ import DialogsContainer from "./Components/Dialigs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import NavigationContainer from "./Components/Navigation/NavigationContainer";
 import Login from "./Components/Login/Login";
+import {connect} from "react-redux";
+import {getInitialize} from "./Redux/Reducers/InitializationReducer";
+import Preloader from "./Components/Common/Preloader/Preloader";
 
 class App extends React.Component {
+
+    componentDidMount() {
+        getInitialize()
+    }
+
     render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
         return (
             <div className="App container-fluid">
                 <div className="row">
@@ -25,4 +36,6 @@ class App extends React.Component {
     }
 }
 
-export default App;
+let mapStateToProps = (state) => ({initialized: state.InitializationReducer.initialized})
+
+export default connect(mapStateToProps, getInitialize)(App);
