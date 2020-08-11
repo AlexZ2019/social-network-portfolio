@@ -26,7 +26,7 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.profile !== this.props.profile) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.updateProfile()
         }
     }
