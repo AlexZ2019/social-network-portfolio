@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {getDialogs, getUsersForDialogs} from "../../Redux/Selectors/DialogsSelector";
 import {addMessage, deleteDialog} from "../../Redux/Reducers/DialogsReducer";
 import Dialogs from "./Dialogs";
+import {WithRedirect} from "../../Tools/HOCS/WithRedirect";
+import {compose} from "redux";
 
 class DialogsContainer extends React.Component {
     onAddMessage = (values) => {
@@ -21,4 +23,7 @@ let mapStateToProps = (state) => {
         users: getUsersForDialogs(state)
     }
 }
-export default connect(mapStateToProps, {addMessage, deleteDialog})(DialogsContainer)
+export default compose(
+    connect(mapStateToProps, {addMessage, deleteDialog}),
+    WithRedirect
+)(DialogsContainer)
