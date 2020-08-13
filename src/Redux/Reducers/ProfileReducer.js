@@ -7,7 +7,6 @@ const DELETE_POST = "ProfileReducer/DELETE_POST"
 const SET_PROFILE = "ProfileReducer/SET_PROFILE"
 const SET_PROFILE_STATUS = "ProfileReducer/SET_PROFILE_STATUS"
 const SAVE_PHOTO = "ProfileReducer/SAVE_PHOTO"
-const SAVE_PROFILE = "ProfileReducer/SAVE_PROFILE"
 
 let initialState = {
     posts: [
@@ -54,11 +53,6 @@ const ProfileReducer = (state = initialState, action) => {
                ...state, profile: {...state.profile, photos: action.photos}
             }
         }
-        // case SAVE_PROFILE: {
-        //     return {
-        //         ...state, profile: action.profileData
-        //     }
-        // }
 
         default:
             return state
@@ -99,12 +93,6 @@ const savePhotoSuccess = photos => {
     }
 }
 
-const saveProfileSuccess = profileData => {
-    return {
-        type: SAVE_PROFILE,
-        profileData
-    }
-}
 //Thunk creators
 export const addPost = newPost => dispatch => {
     dispatch(addPostSuccess(newPost))
