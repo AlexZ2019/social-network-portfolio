@@ -7,6 +7,7 @@ const DELETE_POST = "ProfileReducer/DELETE_POST"
 const SET_PROFILE = "ProfileReducer/SET_PROFILE"
 const SET_PROFILE_STATUS = "ProfileReducer/SET_PROFILE_STATUS"
 const SAVE_PHOTO = "ProfileReducer/SAVE_PHOTO"
+const SAVE_PROFILE = "ProfileReducer/SAVE_PROFILE"
 
 let initialState = {
     posts: [
@@ -53,6 +54,11 @@ const ProfileReducer = (state = initialState, action) => {
                ...state, profile: {...state.profile, photos: action.photos}
             }
         }
+        // case SAVE_PROFILE: {
+        //     return {
+        //         ...state, profile: action.profileData
+        //     }
+        // }
 
         default:
             return state
@@ -73,9 +79,10 @@ const deletePostSuccess = (postId) => {
 }
 
 const setProfile = (profile) => {
-    return (
-        {type: SET_PROFILE, profile}
-    )
+    return {
+        type: SET_PROFILE,
+        profile
+        }
 }
 
 const setProfileStatus = profileStatus => {
@@ -89,6 +96,13 @@ const savePhotoSuccess = photos => {
     return {
         type: SAVE_PHOTO,
         photos
+    }
+}
+
+const saveProfileSuccess = profileData => {
+    return {
+        type: SAVE_PROFILE,
+        profileData
     }
 }
 //Thunk creators
@@ -124,6 +138,14 @@ export const saveNewPhoto = photo => async dispatch => {
     let response = await ProfileAPI.changePhoto(photo)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const saveProfile = profileData => async (dispatch, getState) => {
+    let userId = getState().AuthReducer.userId
+    let response = await ProfileAPI.saveProfileRequest(profileData)
+    if (response.data.resultCode === 0) {
+        dispatch(getProfile(userId))
     }
 }
 
