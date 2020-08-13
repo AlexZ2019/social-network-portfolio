@@ -13,6 +13,7 @@ const Profile = (props) => {
             <ProfileInfo profile={props.profile}
                          profileStatus={props.profileStatus}
                          updateProfileStatus={props.updateProfileStatus}
+                         getNewPhoto={props.getNewPhoto}
             />
             <ProfilePostsContainer/>
         </>

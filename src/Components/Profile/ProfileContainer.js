@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import {compose} from "redux";
 import {withRouter} from "react-router";
-import {getProfile, getProfileStatus, updateProfileStatus} from "../../Redux/Reducers/ProfileReducer";
+import {getProfile, getProfileStatus, saveNewPhoto, updateProfileStatus} from "../../Redux/Reducers/ProfileReducer";
 import {getProfileFromState, getProfileStatusFromState} from "../../Redux/Selectors/ProfileSelector";
 import {getAuthUserIdFromState} from "../../Redux/Selectors/AuthSelector";
 import {WithRedirect} from "../../Tools/HOCS/WithRedirect";
@@ -32,10 +32,18 @@ class ProfileContainer extends React.Component {
         }
     }
 
+    getNewPhoto = (e) => {
+        if (e.target.files.length) {
+            this.props.saveNewPhoto(e.target.files[0])
+        }
+
+    }
+
     render() {
         return <Profile profile={this.props.profile}
                         profileStatus={this.props.profileStatus}
                         updateProfileStatus={this.props.updateProfileStatus}
+                        getNewPhoto={this.getNewPhoto}
             />
     }
 }
@@ -49,7 +57,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose (
-    connect(mapStateToProps, {getProfile, getProfileStatus, updateProfileStatus}),
+    connect(mapStateToProps, {getProfile, getProfileStatus, updateProfileStatus, saveNewPhoto}),
     withRouter,
     WithRedirect
 )(ProfileContainer)

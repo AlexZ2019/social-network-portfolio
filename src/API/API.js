@@ -39,5 +39,16 @@ export const ProfileAPI = {
 
     updateProfileStatus(status) {
         return instance.put(`profile/status/`, {status})
+    },
+
+    changePhoto(photo) {
+        let formData = new FormData()
+        formData.append("image", photo)
+        return instance.put(`profile/photo`, formData, {
+                headers: {
+                    "Content-type": "multipart/form-data"
+                }
+            }
+        )
     }
 }

@@ -2,10 +2,11 @@ import {reset} from "redux-form";
 import {ProfileAPI} from "../../API/API";
 import {isFetching} from "./IsFetchingReducer";
 
-const ADD_POST = "src/Redux/Reducers/ProfileReducer/ADD_POST"
-const DELETE_POST = "src/Redux/Reducers/ProfileReducer/DELETE_POST"
-const SET_PROFILE = "src/Redux/Reducers/ProfileReducer/SET_PROFILE"
-const SET_PROFILE_STATUS = "src/Redux/Reducers/ProfileReducer/SET_PROFILE_STATUS"
+const ADD_POST = "ProfileReducer/ADD_POST"
+const DELETE_POST = "ProfileReducer/DELETE_POST"
+const SET_PROFILE = "ProfileReducer/SET_PROFILE"
+const SET_PROFILE_STATUS = "ProfileReducer/SET_PROFILE_STATUS"
+const SAVE_PHOTO = "ProfileReducer/SAVE_PHOTO"
 
 let initialState = {
     posts: [
@@ -28,7 +29,7 @@ const ProfileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             return {
-                ...state, posts: [...state.posts, {postId: state.posts.length + 2,post: action.newPost}]
+                ...state, posts: [{postId: state.posts.length + 2,post: action.newPost} ,...state.posts]
                 // postId: state.posts.length + 2 is temporary. It needs to be refactored
             }
         }
@@ -45,6 +46,11 @@ const ProfileReducer = (state = initialState, action) => {
         case SET_PROFILE_STATUS: {
             return {
                 ...state, profileStatus: action.profileStatus
+            }
+        }
+        case SAVE_PHOTO: {
+            return {
+               ...state, profile: {...state.profile, photos: action.photos}
             }
         }
 
@@ -79,6 +85,12 @@ const setProfileStatus = profileStatus => {
     }
 }
 
+const savePhotoSuccess = photos => {
+    return {
+        type: SAVE_PHOTO,
+        photos
+    }
+}
 //Thunk creators
 export const addPost = newPost => dispatch => {
     dispatch(addPostSuccess(newPost))
@@ -105,6 +117,13 @@ export const updateProfileStatus = profileStatus => async dispatch => {
     let response = await ProfileAPI.updateProfileStatus(profileStatus)
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatus(profileStatus))
+    }
+}
+
+export const saveNewPhoto = photo => async dispatch => {
+    let response = await ProfileAPI.changePhoto(photo)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 
