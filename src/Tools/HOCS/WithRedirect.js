@@ -20,5 +20,5 @@ export const WithRedirect = (WrappedComponent) => {
             }
         }
     }
-    return connect(mapStateToProps, {})(WithRedirectComponent)
+    return connect(mapStateToProps, {})(WithRedirectComponent);
 }

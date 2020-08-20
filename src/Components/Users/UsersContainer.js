@@ -8,20 +8,30 @@ import {
     getTotalUserCount,
     getUsersFromState
 } from "../../Redux/Selectors/UsersSelector";
-import {getUsers} from "../../Redux/Reducers/UsersReducer";
+import {getSubscribe, getUnsubscribe, getUsers} from "../../Redux/Reducers/UsersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
+    subscribeUser = (userId) => {
+        this.props.getSubscribe(userId);
+    }
+
+    unSubscribeUser = (userId) => {
+        this.props.getUnsubscribe(userId);
+    }
     render() {
         return (<>
                 {this.props.isFetching && <Preloader/>}
-                <Users {...this.props}/>
+                <Users {...this.props}
+                       subscribeUser={this.subscribeUser}
+                       unSubscribeUser={this.unSubscribeUser}
+                />
             </>
         )
     }
@@ -30,7 +40,7 @@ class UsersContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         users: getUsersFromState(state),
-        subscribed: getSubscribed(state),
+        isSubscribed: getSubscribed(state),
         isFetching: state.IsFetchingReducer.isFetching,
         totalUsersCount: getTotalUserCount(state),
         currentPage: getCurrentPage(state),
@@ -39,4 +49,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getUsers})(UsersContainer)
+export default connect(mapStateToProps, {getUsers, getSubscribe, getUnsubscribe})(UsersContainer);

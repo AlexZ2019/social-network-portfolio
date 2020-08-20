@@ -22,4 +22,4 @@ let mapStateToProps = (state) => {
         posts: getPostsFromState(state)
     }
 }
-export default connect(mapStateToProps, {addPost, deletePost})(ProfilePostsContainer)
+export default connect(mapStateToProps, {addPost, deletePost})(ProfilePostsContainer);

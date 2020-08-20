@@ -14,7 +14,7 @@ import Preloader from "./Components/Common/Preloader/Preloader";
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.getInitialize()
+        this.props.getInitialize();
     }
 
     render() {
@@ -37,6 +37,6 @@ class App extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => ({initialized: state.InitializationReducer.initialized})
+let mapStateToProps = (state) => ({initialized: state.InitializationReducer.initialized});
 
 export default connect(mapStateToProps, {getInitialize})(App);

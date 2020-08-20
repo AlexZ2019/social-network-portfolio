@@ -13,37 +13,47 @@ export const UsersApI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
             return response.data
         })
+    },
+    getSubscribed(userId) {
+        return instance.post("follow/" + userId).then(response => {
+           return response.data
+        })
+    },
+    getUnsubscribed(userId) {
+        return instance.delete("follow/" + userId).then(response => {
+            return response.data
+        })
     }
 }
 
 export const AuthorizationApI = {
     getAuthMe() {
-        return instance.get("auth/me")
+        return instance.get("auth/me");
     },
     login(email, password, rememberMe = false) {
-        return instance.post("auth/login", {email, password, rememberMe})
+        return instance.post("auth/login", {email, password, rememberMe});
     },
     logout() {
-        return instance.delete("auth/login")
+        return instance.delete("auth/login");
     }
 }
 
 export const ProfileAPI = {
     getProfile(userId) {
-        return instance.get(`profile/${userId}`)
+        return instance.get(`profile/${userId}`);
     },
 
     getProfileStatus(userId) {
-        return instance.get(`profile/status/` + userId)
+        return instance.get(`profile/status/` + userId);
     },
 
     updateProfileStatus(status) {
-        return instance.put(`profile/status/`, {status})
+        return instance.put(`profile/status/`, {status});
     },
 
     changePhoto(photo) {
-        let formData = new FormData()
-        formData.append("image", photo)
+        let formData = new FormData();
+        formData.append("image", photo);
         return instance.put(`profile/photo`, formData, {
                 headers: {
                     "Content-type": "multipart/form-data"
@@ -53,6 +63,6 @@ export const ProfileAPI = {
     },
 
     saveProfileRequest(profileData) {
-        return instance.put("profile", profileData)
+        return instance.put("profile", profileData);
     }
 }

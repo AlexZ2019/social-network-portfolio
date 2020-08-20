@@ -1,7 +1,7 @@
 import {reset} from "redux-form";
 
-const ADD_MESSAGE = "src/Redux/Reducers/DialogReducer/ADD_MESSAGE/"
-const DELETE_DIALOG = "src/Redux/Reducers/DialogReducer/DELETE_DIALOG/"
+const ADD_MESSAGE = "src/Redux/Reducers/DialogReducer/ADD_MESSAGE/";
+const DELETE_DIALOG = "src/Redux/Reducers/DialogReducer/DELETE_DIALOG/";
 
 let initialState = {
     users: [
@@ -40,7 +40,7 @@ const DialogReducer = (state=initialState, action) => {
             return {
                 ...state, dialogs: state.dialogs.filter(dialog => dialog !== action.dialog)
             }
-        default: return state
+        default: return state;
     }
 }
 
@@ -54,12 +54,12 @@ let deleteDialogSuccess = (dialog) => {
 }
 //Thunk creators
 export let addMessage = newMessage => dispatch => {
-    dispatch(addMessageSuccess(newMessage))
-    dispatch(reset("dialogForm"))
+    dispatch(addMessageSuccess(newMessage));
+    dispatch(reset("dialogForm"));
 }
 
 export let deleteDialog = dialog => dispatch => {
-    dispatch(deleteDialogSuccess(dialog))
+    dispatch(deleteDialogSuccess(dialog));
 }
 
-export default DialogReducer
+export default DialogReducer;

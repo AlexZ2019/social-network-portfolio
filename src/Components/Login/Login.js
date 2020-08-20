@@ -8,7 +8,7 @@ import {getIsAuthFromState} from "../../Redux/Selectors/AuthSelector";
 import {Redirect} from "react-router";
 
 
-const checkValueLength_4_20 = checkValueLength(4, 20)
+const checkValueLength_4_20 = checkValueLength(4, 20);
 
 const LoginForm = ({handleSubmit}) => {
     return <form onSubmit={handleSubmit}>
@@ -21,7 +21,7 @@ const LoginForm = ({handleSubmit}) => {
 
 const LoginFormRedux = reduxForm({
     form: "loginForm"
-})(LoginForm)
+})(LoginForm);
 
 const Login = (props) => {
 
@@ -30,7 +30,7 @@ const Login = (props) => {
     }
 
     const getAuthorized = (values) => {
-        props.getLogin(values.email, values.password, values.rememberMe)
+        props.getLogin(values.email, values.password, values.rememberMe);
     }
 
 
@@ -44,4 +44,4 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {getLogin})(Login)
+export default connect(mapStateToProps, {getLogin})(Login);

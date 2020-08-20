@@ -1,7 +1,7 @@
 import {AuthorizationApI} from "../../API/API";
 import {stopSubmit} from "redux-form";
 
-const SET_AUTH_DATA = "src/Redux/Reducers/AuthReducer/SET_AUTH_DATA"
+const SET_AUTH_DATA = "src/Redux/Reducers/AuthReducer/SET_AUTH_DATA";
 
 let initialState = {
     isAuth: false,
@@ -34,10 +34,10 @@ const setAuthData = (userId, email, login, isAuth) => {
 
 // Thunk creators
 export const getAuth = () => async dispatch => {
-    let response = await AuthorizationApI.getAuthMe()
+    let response = await AuthorizationApI.getAuthMe();
     if (response.data.resultCode === 0) {
-        let {id, email, login} = response.data.data
-        dispatch(setAuthData(id, email, login, true))
+        let {id, email, login} = response.data.data;
+        dispatch(setAuthData(id, email, login, true));
     }
 }
 
@@ -47,14 +47,14 @@ export const getLogin = (email, password, rememberMe) => async dispatch => {
         dispatch(getAuth());
     } else {
         let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
-        dispatch(stopSubmit("loginForm", {_error: message}))
+        dispatch(stopSubmit("loginForm", {_error: message}));
     }
 }
 
 export const getLogout = () => async dispatch => {
     let response = await AuthorizationApI.logout();
     if (response.data.resultCode === 0) {
-        dispatch(setAuthData(null, null, null, false))
+        dispatch(setAuthData(null, null, null, false));
     }
 }
-export default AuthReducer
+export default AuthReducer;

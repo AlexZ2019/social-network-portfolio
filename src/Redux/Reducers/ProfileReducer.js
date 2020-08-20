@@ -2,11 +2,11 @@ import {reset} from "redux-form";
 import {ProfileAPI} from "../../API/API";
 import {isFetching} from "./IsFetchingReducer";
 
-const ADD_POST = "ProfileReducer/ADD_POST"
-const DELETE_POST = "ProfileReducer/DELETE_POST"
-const SET_PROFILE = "ProfileReducer/SET_PROFILE"
-const SET_PROFILE_STATUS = "ProfileReducer/SET_PROFILE_STATUS"
-const SAVE_PHOTO = "ProfileReducer/SAVE_PHOTO"
+const ADD_POST = "ProfileReducer/ADD_POST";
+const DELETE_POST = "ProfileReducer/DELETE_POST";
+const SET_PROFILE = "ProfileReducer/SET_PROFILE";
+const SET_PROFILE_STATUS = "ProfileReducer/SET_PROFILE_STATUS";
+const SAVE_PHOTO = "ProfileReducer/SAVE_PHOTO";
 
 let initialState = {
     posts: [
@@ -95,46 +95,46 @@ const savePhotoSuccess = photos => {
 
 //Thunk creators
 export const addPost = newPost => dispatch => {
-    dispatch(addPostSuccess(newPost))
-    dispatch(reset("addNewPostForm"))
+    dispatch(addPostSuccess(newPost));
+    dispatch(reset("addNewPostForm"));
 }
 
 export const deletePost = postId => dispatch => {
-    dispatch(deletePostSuccess(postId))
+    dispatch(deletePostSuccess(postId));
 }
 
 export const getProfile = userId => async dispatch => {
-    dispatch (isFetching(true))
-    let response = await ProfileAPI.getProfile(userId)
-    dispatch (isFetching(false))
-    dispatch(setProfile(response.data))
+    dispatch (isFetching(true));
+    let response = await ProfileAPI.getProfile(userId);
+    dispatch (isFetching(false));
+    dispatch(setProfile(response.data));
 }
 
 export const getProfileStatus = userId => async dispatch => {
-    let response = await ProfileAPI.getProfileStatus(userId)
-    dispatch(setProfileStatus(response.data))
+    let response = await ProfileAPI.getProfileStatus(userId);
+    dispatch(setProfileStatus(response.data));
 }
 
 export const updateProfileStatus = profileStatus => async dispatch => {
-    let response = await ProfileAPI.updateProfileStatus(profileStatus)
+    let response = await ProfileAPI.updateProfileStatus(profileStatus);
     if (response.data.resultCode === 0) {
-        dispatch(setProfileStatus(profileStatus))
+        dispatch(setProfileStatus(profileStatus));
     }
 }
 
 export const saveNewPhoto = photo => async dispatch => {
-    let response = await ProfileAPI.changePhoto(photo)
+    let response = await ProfileAPI.changePhoto(photo);
     if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos))
+        dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }
 
 export const saveProfile = profileData => async (dispatch, getState) => {
-    let userId = getState().AuthReducer.userId
-    let response = await ProfileAPI.saveProfileRequest(profileData)
+    let userId = getState().AuthReducer.userId;
+    let response = await ProfileAPI.saveProfileRequest(profileData);
     if (response.data.resultCode === 0) {
-        dispatch(getProfile(userId))
+        dispatch(getProfile(userId));
     }
 }
 
-export default ProfileReducer
+export default ProfileReducer;

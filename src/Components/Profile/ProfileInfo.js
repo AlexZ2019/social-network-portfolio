@@ -32,7 +32,7 @@ const ProfileDataEditForm = ({handleSubmit, ...props}) => {
 
 const ProfileDataEditFormRedux = reduxForm({
     form: "profileDataForm"
-})(ProfileDataEditForm)
+})(ProfileDataEditForm);
 
 const ProfileInfo = React.memo(props => {
 
@@ -40,7 +40,7 @@ const ProfileInfo = React.memo(props => {
 
     const getNewPhoto = (e) => {
         if (e.target.files.length) {
-            props.saveNewPhoto(e.target.files[0])
+            props.saveNewPhoto(e.target.files[0]);
         }
     }
 
@@ -51,11 +51,11 @@ const ProfileInfo = React.memo(props => {
     }
 
     const deactivateEditMode = () => {
-        setEditMode(false)
+        setEditMode(false);
     }
 
     const activateEditMode = () => {
-        setEditMode(true)
+        setEditMode(true);
     }
 
     return (

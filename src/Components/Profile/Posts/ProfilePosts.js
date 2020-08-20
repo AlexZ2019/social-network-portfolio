@@ -14,8 +14,8 @@ const NewPostForm = ({handleSubmit}) => {
 }
 
 const NewPostFormRedux = reduxForm({
-    form: 'addNewPostForm'
-})(NewPostForm)
+    form: "addNewPostForm"
+})(NewPostForm);
 
 let ProfilePosts = (props) => {
 
@@ -29,4 +29,4 @@ let ProfilePosts = (props) => {
     )
 }
 
-export default ProfilePosts
+export default ProfilePosts;

@@ -8,7 +8,7 @@ import {compose} from "redux";
 
 class DialogsContainer extends React.Component {
     onAddMessage = (values) => {
-        this.props.addMessage(values.newMessage)
+        this.props.addMessage(values.newMessage);
     }
     render() {
         return (
@@ -26,4 +26,4 @@ let mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps, {addMessage, deleteDialog}),
     WithRedirect
-)(DialogsContainer)
+)(DialogsContainer);

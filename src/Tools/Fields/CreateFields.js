@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./createFields.module.css"
+import s from "./createFields.module.css";
 
 export const Input = ({input, meta:{error, touched}, ...props}) => {
     let hasError = touched && error

@@ -2,25 +2,25 @@ import React, {useEffect, useState} from "react";
 
 const ProfileInfoStatus = (props) => {
 
-    let [editMode, setEditMode] = useState(false)
-    let [status, setStatus] = useState(props.profileStatus)
+    let [editMode, setEditMode] = useState(false);
+    let [status, setStatus] = useState(props.profileStatus);
 
     useEffect(() => {
-        setStatus(props.profileStatus)
-    }, [props.profileStatus])
+        setStatus(props.profileStatus);
+    }, [props.profileStatus]);
 
     let activateEditMode = () => {
-        setEditMode(true)
+        setEditMode(true);
 
     }
 
     let deactivateEditMode = () => {
         setEditMode(false)
-        props.updateProfileStatus(status)
+        props.updateProfileStatus(status);
     }
 
     let onProfileStatusChange = (e) => {
-        setStatus(e.currentTarget.value)
+        setStatus(e.currentTarget.value);
     }
 
     return <div>
@@ -29,5 +29,5 @@ const ProfileInfoStatus = (props) => {
     </div>
 }
 
-export default ProfileInfoStatus
+export default ProfileInfoStatus;
 

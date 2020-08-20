@@ -12,7 +12,7 @@ let DialogsForm = ({handleSubmit}) => {
 
 let DialogsFormRedux = reduxForm({
     form: "dialogForm"
-})(DialogsForm)
+})(DialogsForm);
 
 let Dialogs = (props) => {
     return (<React.Fragment>
@@ -26,4 +26,4 @@ let Dialogs = (props) => {
         </React.Fragment>
     )
 }
-export default Dialogs
+export default Dialogs;

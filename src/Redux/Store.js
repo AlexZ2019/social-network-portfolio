@@ -18,8 +18,8 @@ const reducers = combineReducers({
     InitializationReducer
 })
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleWare))
+const store = createStore(reducers, applyMiddleware(thunkMiddleWare));
 
-window.store = store
+window.store = store;
 
 export default store;

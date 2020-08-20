@@ -1,4 +1,4 @@
-const IS_FETCHING = "src/Redux/Reducers/IsFetchingReducer/IS_FETCHING"
+const IS_FETCHING = "src/Redux/Reducers/IsFetchingReducer/IS_FETCHING";
 
 let initialState = {
     isFetching: false
@@ -17,4 +17,4 @@ export const isFetching = (isFetching) => {
     return {type: IS_FETCHING, isFetching}
 }
 
-export default IsFetchingReducer
+export default IsFetchingReducer;

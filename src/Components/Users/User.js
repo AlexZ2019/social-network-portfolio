@@ -1,9 +1,9 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import defaultAvatar from "../../files/images/User_Avatar.png"
-import s from "./Users.module.css"
+import defaultAvatar from "../../files/images/User_Avatar.png";
+import s from "./Users.module.css";
 
-const User = ({user}, {...props}) => {
+const User = ({user, ...props}) => {
     return <div className={s["user"]} key={user.id}>
         <NavLink to={"/profile/" + user.id}>
             <img src={user.photos.small !== null ? user.photos.small : defaultAvatar} alt=""/>
@@ -14,8 +14,11 @@ const User = ({user}, {...props}) => {
         <span>
             {user.status}
         </span>
-        {props.subscribed ? <button>unsubscribe</button> : <button>subscribe</button>}
+        {user.followed
+            ? <button onClick={() => props.unSubscribeUser(user.id)}>unsubscribe</button>
+            : <button onClick={() => props.subscribeUser(user.id)}>subscribe</button>
+        }
     </div>
 }
 
-export default User
+export default User;

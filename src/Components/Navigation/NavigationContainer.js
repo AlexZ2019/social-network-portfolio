@@ -6,10 +6,10 @@ import {getAuthLoginFromState, getIsAuthFromState} from "../../Redux/Selectors/A
 
 class NavigationContainer extends React.Component{
     componentDidMount() {
-        this.props.getAuth()
+        this.props.getAuth();
     }
     getLogout() {
-        this.props.getLogout()
+        this.props.getLogout();
     }
     render() {
         return (
@@ -25,4 +25,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getAuth, getLogout})(NavigationContainer)
+export default connect(mapStateToProps, {getAuth, getLogout})(NavigationContainer);

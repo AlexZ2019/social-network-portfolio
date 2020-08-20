@@ -3,7 +3,7 @@ export const getUsersFromState = (state) => {
 }
 
 export const getSubscribed = (state) => {
-    return state.UsersReducer.subscribed
+    return state.UsersReducer.isSubscribed
 }
 
 export const getTotalUserCount = (state) => {

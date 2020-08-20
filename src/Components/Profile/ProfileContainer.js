@@ -17,24 +17,24 @@ import {WithRedirect} from "../../Tools/HOCS/WithRedirect";
 class ProfileContainer extends React.Component {
 
     updateProfile() {
-        let userId = this.props.match.params.userId
+        let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = this.props.userId
+            userId = this.props.userId;
             if (!userId) {
-                this.props.history.push("/login")
+                this.props.history.push("/login");
             }
         }
-        this.props.getProfile(userId)
-        this.props.getProfileStatus(userId)
+        this.props.getProfile(userId);
+        this.props.getProfileStatus(userId);
     }
 
     componentDidMount() {
-        this.updateProfile()
+        this.updateProfile();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
-            this.updateProfile()
+            this.updateProfile();
         }
     }
 
@@ -61,4 +61,4 @@ export default compose (
     connect(mapStateToProps, {getProfile, getProfileStatus, updateProfileStatus, saveNewPhoto, saveProfile}),
     withRouter,
     WithRedirect
-)(ProfileContainer)
+)(ProfileContainer);
