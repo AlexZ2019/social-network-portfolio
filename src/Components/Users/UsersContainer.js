@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    getCurrentPage,
+    getCurrentPage, getInProcess,
     getPageSize,
     getPortionPageSize,
     getSubscribed,
@@ -31,6 +31,7 @@ class UsersContainer extends React.Component {
                 <Users {...this.props}
                        subscribeUser={this.subscribeUser}
                        unSubscribeUser={this.unSubscribeUser}
+                       inProcess={this.props.inProcess}
                 />
             </>
         )
@@ -45,7 +46,8 @@ let mapStateToProps = (state) => {
         totalUsersCount: getTotalUserCount(state),
         currentPage: getCurrentPage(state),
         pageSize: getPageSize(state),
-        portionPageSize: getPortionPageSize(state)
+        portionPageSize: getPortionPageSize(state),
+        inProcess: getInProcess(state)
     }
 }
 

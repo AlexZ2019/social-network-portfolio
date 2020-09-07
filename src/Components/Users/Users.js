@@ -11,6 +11,7 @@ const Users = (props) => {
                                        isSubscribed={props.isSubscribed}
                                        subscribeUser={props.subscribeUser}
                                        unSubscribeUser={props.unSubscribeUser}
+                                       inProcess={props.inProcess}
         />)}
         <Pagination {...props}/>
     </div>

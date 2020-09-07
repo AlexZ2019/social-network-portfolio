@@ -6,6 +6,10 @@ export const getSubscribed = (state) => {
     return state.UsersReducer.isSubscribed
 }
 
+export const getInProcess = (state) => {
+    return state.UsersReducer.inProcess
+}
+
 export const getTotalUserCount = (state) => {
     return state.UsersReducer.totalUsersCount
 }

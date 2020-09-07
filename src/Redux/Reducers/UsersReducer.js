@@ -5,6 +5,7 @@ const GET_USERS = "src/Redux/Reducers/UsersReducer/GET_USERS";
 const SET_TOTAL_USERS_COUNT = "src/Redux/Reducers/UsersReducer/SET_TOTAL_USERS_COUNT";
 const SUBSCRIBE = "src/Redux/Reducers/UsersReducer/SUBSCRIBE";
 const UNSUBSCRIBE = "src/Redux/Reducers/UsersReducer/UNSUBSCRIBE";
+const TOGGLE_IN_PROCESS = "src/Redux/Reducers/UsersReducer/TOGGLE_IN_PROCESS";
 
 let initialState = {
     users: [],
@@ -12,7 +13,8 @@ let initialState = {
     pageSize: 20,
     currentPage: 1,
     portionPageSize: 10,
-    isSubscribed: false
+    isSubscribed: false,
+    inProcess: false
 }
 
 const UserReducer = (state= initialState, action) => {
@@ -43,6 +45,11 @@ const UserReducer = (state= initialState, action) => {
                     return u
                 })
             }
+        case TOGGLE_IN_PROCESS:
+            return {
+                ...state, inProcess: action.inProcess
+            }
+
         default: return state
     }
 }
@@ -76,7 +83,12 @@ const getUnSubscribeSuccess = (userId) => {
     }
 }
 
-
+const toggleInProcess = (inProcess) => {
+    return {
+        type: TOGGLE_IN_PROCESS,
+        inProcess
+    }
+}
 
 // Thunk creator
 export const getUsers = (currentPage, pageSize) => async dispatch => {
@@ -88,16 +100,18 @@ export const getUsers = (currentPage, pageSize) => async dispatch => {
 }
 
 export const getSubscribe = (userId) => async dispatch => {
+    dispatch(toggleInProcess(true));
     let data = await UsersApI.getSubscribed(userId);
-    debugger
+    dispatch(toggleInProcess(false));
     if (data.resultCode === 0) {
         dispatch(getSubscribeSuccess(userId));
     }
 }
 
 export const getUnsubscribe = (userId) => async dispatch => {
+    dispatch(toggleInProcess(true));
     let data = await UsersApI.getUnsubscribed(userId);
-    debugger
+    dispatch(toggleInProcess(false));
     if (data.resultCode === 0) {
         dispatch(getUnSubscribeSuccess(userId));
     }

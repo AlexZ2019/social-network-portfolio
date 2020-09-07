@@ -15,8 +15,8 @@ const User = ({user, ...props}) => {
             {user.status}
         </span>
         {user.followed
-            ? <button onClick={() => props.unSubscribeUser(user.id)}>unsubscribe</button>
-            : <button onClick={() => props.subscribeUser(user.id)}>subscribe</button>
+            ? <button disabled={props.inProcess} onClick={() => props.unSubscribeUser(user.id)}>unsubscribe</button>
+            : <button disabled={props.inProcess} onClick={() => props.subscribeUser(user.id)}>subscribe</button>
         }
     </div>
 }
