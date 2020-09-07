@@ -13,3 +13,7 @@ export const getAuthEmailFromState = (state) => {
 export const getAuthLoginFromState = (state) => {
     return state.AuthReducer.login
 }
+
+export const getCaptchaFromState = (state) => {
+    return state.AuthReducer.captcha
+}
