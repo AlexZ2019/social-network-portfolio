@@ -31,7 +31,6 @@ const AuthReducer = (state = initialState, action) => {
 // Action Creators
 
 const setAuthData = (userId, email, login, isAuth) => {
-    // console.log(userId, email, login)
     return {
         type: SET_AUTH_DATA,
         payload: {userId, email, login, isAuth}

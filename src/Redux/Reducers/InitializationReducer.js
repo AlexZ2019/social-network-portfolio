@@ -1,6 +1,5 @@
 import {getAuth} from "./AuthReducer";
 
-
 const INITIALIZE = "InitializationReducer/INITIALIZE";
 
 let InitialState = {
@@ -12,13 +11,14 @@ const InitializationReducer = (state = InitialState, action) => {
         return {
             ...state, initialized: true
         }
-    }
-    else {
+    } else {
         return state
     }
 }
 
-const initializedSuccess = () => ({type: INITIALIZE});
+const initializedSuccess = () => (
+    {type: INITIALIZE}
+);
 
 export const getInitialize = () => (dispatch) => {
     let promise = dispatch(getAuth());

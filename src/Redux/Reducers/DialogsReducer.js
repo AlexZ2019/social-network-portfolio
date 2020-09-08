@@ -30,7 +30,7 @@ let initialState = {
     ]
 }
 
-const DialogReducer = (state=initialState, action) => {
+const DialogReducer = (state= initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {

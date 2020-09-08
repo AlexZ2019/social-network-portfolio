@@ -76,7 +76,7 @@ const setProfile = (profile) => {
     return {
         type: SET_PROFILE,
         profile
-        }
+    }
 }
 
 const setProfileStatus = profileStatus => {

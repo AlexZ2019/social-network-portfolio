@@ -17,7 +17,7 @@ let initialState = {
     inProcess: false
 }
 
-const UserReducer = (state= initialState, action) => {
+const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USERS:
             return {
@@ -25,17 +25,17 @@ const UserReducer = (state= initialState, action) => {
             }
         case SET_TOTAL_USERS_COUNT:
             return {
-                ...state,totalUsersCount: action.totalUsersCount
+                ...state, totalUsersCount: action.totalUsersCount
             }
         case SUBSCRIBE:
             return {
                 ...state, users: state.users.map(u => {
-                if (u.id === action.userId) {
-                    return {...u, followed: true}
-                }
-                return u
+                    if (u.id === action.userId) {
+                        return {...u, followed: true}
+                    }
+                    return u
                 })
-        }
+            }
         case UNSUBSCRIBE:
             return {
                 ...state, users: state.users.map(u => {
@@ -50,7 +50,8 @@ const UserReducer = (state= initialState, action) => {
                 ...state, inProcess: action.inProcess
             }
 
-        default: return state
+        default:
+            return state
     }
 }
 
@@ -99,22 +100,21 @@ export const getUsers = (currentPage, pageSize) => async dispatch => {
     dispatch(setTotalUsersCount(data.totalCount));
 }
 
-export const getSubscribe = (userId) => async dispatch => {
+const subscribeUnsubscribe = (userId, ApiMethod, action) => async dispatch => {
     dispatch(toggleInProcess(true));
-    let data = await UsersApI.getSubscribed(userId);
+    let data = await ApiMethod(userId);
     dispatch(toggleInProcess(false));
     if (data.resultCode === 0) {
-        dispatch(getSubscribeSuccess(userId));
+        dispatch(action(userId));
     }
 }
 
+export const getSubscribe = (userId) => async dispatch => {
+    dispatch(subscribeUnsubscribe(userId, UsersApI.getSubscribed, getSubscribeSuccess))
+}
+
 export const getUnsubscribe = (userId) => async dispatch => {
-    dispatch(toggleInProcess(true));
-    let data = await UsersApI.getUnsubscribed(userId);
-    dispatch(toggleInProcess(false));
-    if (data.resultCode === 0) {
-        dispatch(getUnSubscribeSuccess(userId));
-    }
+    dispatch(subscribeUnsubscribe(userId, UsersApI.getUnsubscribed, getUnSubscribeSuccess))
 }
 
 export default UserReducer;
