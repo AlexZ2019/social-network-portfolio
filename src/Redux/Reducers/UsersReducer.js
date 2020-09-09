@@ -1,8 +1,8 @@
 import {UsersApI} from "../../API/API";
-import {isFetching} from "./IsFetchingReducer";
 
 const GET_USERS = "src/Redux/Reducers/UsersReducer/GET_USERS";
 const SET_TOTAL_USERS_COUNT = "src/Redux/Reducers/UsersReducer/SET_TOTAL_USERS_COUNT";
+const IS_FETCHING = "src/Redux/Reducers/IsFetchingReducer/IS_FETCHING";
 const SUBSCRIBE = "src/Redux/Reducers/UsersReducer/SUBSCRIBE";
 const UNSUBSCRIBE = "src/Redux/Reducers/UsersReducer/UNSUBSCRIBE";
 const TOGGLE_IN_PROCESS = "src/Redux/Reducers/UsersReducer/TOGGLE_IN_PROCESS";
@@ -14,7 +14,8 @@ let initialState = {
     currentPage: 1,
     portionPageSize: 10,
     isSubscribed: false,
-    inProcess: false
+    isFetching: false,
+    inProcess: []
 }
 
 const UserReducer = (state = initialState, action) => {
@@ -45,9 +46,15 @@ const UserReducer = (state = initialState, action) => {
                     return u
                 })
             }
+        case IS_FETCHING:
+            return {
+                ...state, isFetching: action.isFetching
+            }
         case TOGGLE_IN_PROCESS:
             return {
                 ...state, inProcess: action.inProcess
+                ? [...state.inProcess, action.userId]
+                : state.inProcess.filter(id => id !== action.userId)
             }
 
         default:
@@ -70,6 +77,10 @@ const setTotalUsersCount = (totalUsersCount) => {
     }
 }
 
+const isFetching = (isFetching) => {
+    return {type: IS_FETCHING, isFetching}
+}
+
 const getSubscribeSuccess = (userId) => {
     return {
         type: SUBSCRIBE,
@@ -84,10 +95,11 @@ const getUnSubscribeSuccess = (userId) => {
     }
 }
 
-const toggleInProcess = (inProcess) => {
+const toggleInProcess = (isFetching, userId) => {
     return {
         type: TOGGLE_IN_PROCESS,
-        inProcess
+        isFetching,
+        userId
     }
 }
 
@@ -101,9 +113,9 @@ export const getUsers = (currentPage, pageSize) => async dispatch => {
 }
 
 const subscribeUnsubscribe = (userId, ApiMethod, action) => async dispatch => {
-    dispatch(toggleInProcess(true));
+    dispatch(toggleInProcess(true, userId));
     let data = await ApiMethod(userId);
-    dispatch(toggleInProcess(false));
+    dispatch(toggleInProcess(false, userId));
     if (data.resultCode === 0) {
         dispatch(action(userId));
     }

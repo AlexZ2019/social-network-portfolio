@@ -42,7 +42,7 @@ let mapStateToProps = (state) => {
     return {
         users: getUsersFromState(state),
         isSubscribed: getSubscribed(state),
-        isFetching: state.IsFetchingReducer.isFetching,
+        isFetching: state.UsersReducer.isFetching,
         totalUsersCount: getTotalUserCount(state),
         currentPage: getCurrentPage(state),
         pageSize: getPageSize(state),

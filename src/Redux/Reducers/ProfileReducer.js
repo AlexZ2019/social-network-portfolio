@@ -1,6 +1,5 @@
 import {reset} from "redux-form";
 import {ProfileAPI} from "../../API/API";
-import {isFetching} from "./IsFetchingReducer";
 
 const ADD_POST = "ProfileReducer/ADD_POST";
 const DELETE_POST = "ProfileReducer/DELETE_POST";
@@ -104,9 +103,7 @@ export const deletePost = postId => dispatch => {
 }
 
 export const getProfile = userId => async dispatch => {
-    dispatch (isFetching(true));
     let response = await ProfileAPI.getProfile(userId);
-    dispatch (isFetching(false));
     dispatch(setProfile(response.data));
 }
 
