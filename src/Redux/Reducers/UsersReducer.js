@@ -95,10 +95,11 @@ const getUnSubscribeSuccess = (userId) => {
     }
 }
 
-const toggleInProcess = (isFetching, userId) => {
+const toggleInProcess = (inProcess, userId) => {
+    debugger
     return {
         type: TOGGLE_IN_PROCESS,
-        isFetching,
+        inProcess,
         userId
     }
 }
