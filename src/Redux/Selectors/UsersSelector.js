@@ -25,3 +25,7 @@ export const getPageSize = (state) => {
 export const getPortionPageSize = (state) => {
     return state.UsersReducer.portionPageSize
 }
+
+export const getFilter = (state) => {
+    return state.UsersReducer.filter
+}

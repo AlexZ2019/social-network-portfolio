@@ -1,7 +1,6 @@
 import React from "react";
 import User from "./User";
 import s from "./Users.module.css";
-import Pagination from "../Common/Pagination/Pagination";
 
 
 const Users = (props) => {
@@ -13,7 +12,6 @@ const Users = (props) => {
                                        unSubscribeUser={props.unSubscribeUser}
                                        inProcess={props.inProcess}
         />)}
-        <Pagination {...props}/>
     </div>
 }
 

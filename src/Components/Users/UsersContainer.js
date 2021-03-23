@@ -11,12 +11,14 @@ import {
 import {getSubscribe, getUnsubscribe, getUsers} from "../../Redux/Reducers/UsersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {UserSearcher} from "./UserSearcher";
+import Pagination from "../Common/Pagination/Pagination";
 
 class UsersContainer extends React.Component {
 
-    componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
-    }
+    // componentDidMount() {
+    //     this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    // }
 
     subscribeUser = (userId) => {
         this.props.getSubscribe(userId);
@@ -28,11 +30,14 @@ class UsersContainer extends React.Component {
     render() {
         return (<>
                 {this.props.isFetching && <Preloader/>}
+                <UserSearcher getUsers={this.props.getUsers}/>
                 <Users {...this.props}
                        subscribeUser={this.subscribeUser}
                        unSubscribeUser={this.unSubscribeUser}
                        inProcess={this.props.inProcess}
+                       getUsers={this.props.getUsers}
                 />
+                <Pagination/>
             </>
         )
     }

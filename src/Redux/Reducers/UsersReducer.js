@@ -6,6 +6,8 @@ const IS_FETCHING = "src/Redux/Reducers/IsFetchingReducer/IS_FETCHING";
 const SUBSCRIBE = "src/Redux/Reducers/UsersReducer/SUBSCRIBE";
 const UNSUBSCRIBE = "src/Redux/Reducers/UsersReducer/UNSUBSCRIBE";
 const TOGGLE_IN_PROCESS = "src/Redux/Reducers/UsersReducer/TOGGLE_IN_PROCESS";
+const SET_FILTER = "src/Redux/Reducers/UsersReducer/SET_FILTER";
+const SET_CURRENT_PAGE = "src/Redux/Reducers/UsersReducer/SET_CurrentPage";
 
 let initialState = {
     users: [],
@@ -15,7 +17,10 @@ let initialState = {
     portionPageSize: 10,
     isSubscribed: false,
     isFetching: false,
-    inProcess: []
+    inProcess: [],
+    filter: {
+        term: ""
+    }
 }
 
 const UserReducer = (state = initialState, action) => {
@@ -56,6 +61,14 @@ const UserReducer = (state = initialState, action) => {
                 ? [...state.inProcess, action.userId]
                 : state.inProcess.filter(id => id !== action.userId)
             }
+        case SET_FILTER:
+            return {
+              ...state, filter: action.filter
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state, currentPage: action.currentPage
+            }
 
         default:
             return state
@@ -74,6 +87,13 @@ const setTotalUsersCount = (totalUsersCount) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount
+    }
+}
+
+const setCurrentPage = (currentPage) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
     }
 }
 
@@ -96,7 +116,6 @@ const getUnSubscribeSuccess = (userId) => {
 }
 
 const toggleInProcess = (inProcess, userId) => {
-    debugger
     return {
         type: TOGGLE_IN_PROCESS,
         inProcess,
@@ -104,10 +123,20 @@ const toggleInProcess = (inProcess, userId) => {
     }
 }
 
+const setSearchFilter = (filter) => {
+    return {
+        type: SET_FILTER,
+        filter
+    }
+}
+
 // Thunk creator
-export const getUsers = (currentPage, pageSize) => async dispatch => {
+export const getUsers = (currentPage, pageSize, filter) => async dispatch => {
+
     dispatch(isFetching(true));
-    let data = await UsersApI.getUsersRequest(currentPage, pageSize);
+    dispatch(setCurrentPage(currentPage));
+    dispatch(setSearchFilter(filter));
+    let data = await UsersApI.getUsersRequest(currentPage, pageSize, filter.term);
     dispatch(isFetching(false));
     dispatch(getUsersSuccess(data.items));
     dispatch(setTotalUsersCount(data.totalCount));

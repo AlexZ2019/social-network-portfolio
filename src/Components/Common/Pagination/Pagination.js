@@ -1,7 +1,14 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getFilter, getPageSize, getTotalUserCount} from "../../../Redux/Selectors/UsersSelector";
+import {getUsers} from "../../../Redux/Reducers/UsersReducer";
 
-const Pagination = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+const Pagination = () => {
+    const totalUsersCount = useSelector(getTotalUserCount);
+    const pageSize = useSelector(getPageSize)
+    const dispatch = useDispatch();
+    const filter = useSelector(getFilter);
+    let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let pages = [];
 
     for (let i = 1; i <= pagesCount; i++) {
@@ -13,7 +20,7 @@ const Pagination = (props) => {
     // let LeftPartOfPortionsPages = (portionPageNumber - 1) * props.portionPageSize + 1 // know if there're pages portions before current
     // let RightPartOfPortionsPages = portionPageNumber * props.portionPageSize // know if there're pages portions after current
     let onPageChange = (page) => {
-        props.getUsers(page, props.pageSize);
+        dispatch(getUsers(page, pageSize, filter));
     }
     return <div>
         {pages.map(page => <span key={page} onClick={() => onPageChange(page)}>{page}</span>)}
