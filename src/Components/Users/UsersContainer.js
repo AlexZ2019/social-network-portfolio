@@ -1,14 +1,15 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    getCurrentPage, getInProcess,
+    getCurrentPage,
+    getInProcess,
     getPageSize,
     getPortionPageSize,
     getSubscribed,
     getTotalUserCount,
     getUsersFromState
 } from "../../Redux/Selectors/UsersSelector";
-import {getSubscribe, getUnsubscribe, getUsers} from "../../Redux/Reducers/UsersReducer";
+import {getSubscribe, getUnsubscribe} from "../../Redux/Reducers/UsersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 import {UserSearcher} from "./UserSearcher";
@@ -30,12 +31,11 @@ class UsersContainer extends React.Component {
     render() {
         return (<>
                 {this.props.isFetching && <Preloader/>}
-                <UserSearcher getUsers={this.props.getUsers}/>
+                <UserSearcher />
                 <Users {...this.props}
                        subscribeUser={this.subscribeUser}
                        unSubscribeUser={this.unSubscribeUser}
                        inProcess={this.props.inProcess}
-                       getUsers={this.props.getUsers}
                 />
                 <Pagination/>
             </>
@@ -56,4 +56,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getUsers, getSubscribe, getUnsubscribe})(UsersContainer);
+export default connect(mapStateToProps, {getSubscribe, getUnsubscribe})(UsersContainer);

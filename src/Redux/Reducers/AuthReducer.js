@@ -8,7 +8,7 @@ let initialState = {
     isAuth: false,
     userId: null,
     login: null,
-    email:null,
+    email: null,
     captcha: null
 }
 

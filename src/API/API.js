@@ -10,7 +10,8 @@ const instance = axios.create({
 
 export const UsersApI = {
     getUsersRequest(currentPage, pageSize, term = "", friend = null) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${term}`).then(response => {
+        debugger
+        return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? "" : `&friend=${friend}`)).then(response => {
             return response.data
         })
     },
@@ -69,6 +70,6 @@ export const ProfileAPI = {
 
 export const securityAPi = {
     getCaptcha() {
-        return instance.get("security/get-captcha-url")
+        return instance.get("security/get-captcha-url");
     }
 }

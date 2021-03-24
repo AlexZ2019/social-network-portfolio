@@ -136,7 +136,7 @@ export const getUsers = (currentPage, pageSize, filter) => async dispatch => {
     dispatch(isFetching(true));
     dispatch(setCurrentPage(currentPage));
     dispatch(setSearchFilter(filter));
-    let data = await UsersApI.getUsersRequest(currentPage, pageSize, filter.term);
+    let data = await UsersApI.getUsersRequest(currentPage, pageSize, filter.term, filter.friend);
     dispatch(isFetching(false));
     dispatch(getUsersSuccess(data.items));
     dispatch(setTotalUsersCount(data.totalCount));
