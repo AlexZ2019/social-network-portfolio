@@ -1,5 +1,6 @@
-import {AuthorizationApI, securityAPi} from "../../API/API";
 import {stopSubmit} from "redux-form";
+import {AuthorizationApI} from "../../API/authorizationApI";
+import {securityAPi} from "../../API/securityAPi";
 
 const SET_AUTH_DATA = "src/Redux/Reducers/AuthReducer/SET_AUTH_DATA";
 const GET_CAPTCHA = "src/Redux/Reducers/AuthReducer/GET_CAPTCHA";

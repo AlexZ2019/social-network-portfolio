@@ -26,6 +26,11 @@ const Menu = () => {
                     </NavLink>
                 </li>
                 <li>
+                    <NavLink to={"/all_users_chat"}>
+                        Common chat
+                    </NavLink>
+                </li>
+                <li>
                     <NavLink to={"/settings"}>
                         Settings
                     </NavLink>

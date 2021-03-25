@@ -1,4 +1,4 @@
-import {UsersApI} from "../../API/API";
+import {UsersApI} from "../../API/userAPI";
 
 const GET_USERS = "src/Redux/Reducers/UsersReducer/GET_USERS";
 const SET_TOTAL_USERS_COUNT = "src/Redux/Reducers/UsersReducer/SET_TOTAL_USERS_COUNT";

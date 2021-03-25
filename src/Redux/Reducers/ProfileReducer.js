@@ -1,5 +1,5 @@
 import {reset} from "redux-form";
-import {ProfileAPI} from "../../API/API";
+import {ProfileAPI} from "../../API/profileApI";
 
 const ADD_POST = "ProfileReducer/ADD_POST";
 const DELETE_POST = "ProfileReducer/DELETE_POST";

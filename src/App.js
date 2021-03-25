@@ -10,6 +10,7 @@ import Login from "./Components/Login/Login";
 import {connect} from "react-redux";
 import {getInitialize} from "./Redux/Reducers/InitializationReducer";
 import Preloader from "./Components/Common/Preloader/Preloader";
+import {AllUsersChat} from "./Components/AllUsersChat/AllUsersChat";
 
 class App extends React.Component {
 
@@ -30,6 +31,7 @@ class App extends React.Component {
                     <Route path={"/dialogs"} render={() => <DialogsContainer/>}/>
                     <Route path={"/users"} render={() => <UsersContainer/>}/>
                     <Route path={"/login"} render={() => <Login/>}/>
+                    <Route path={"/all_users_chat"} render={() => <AllUsersChat/>}/>
                     {/*<Route path={"/settings"} render={() => <Settings/>}/>*/}
                 </div>
             </div>
