@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getMessagesFromState, getWsStatusFromState} from "../../Redux/Selectors/AllUsersChatSelector";
+import {getMessagesFromState} from "../../Redux/Selectors/AllUsersChatSelector";
 import {Message} from "./Message";
 import {SendMessage} from "./SendMessage";
-import {getMessages} from "../../Redux/Reducers/AllUsersChatReducer";
+import {getNewMessages} from "../../Redux/Reducers/AllUsersChatReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 export const AllUsersChat = () => {
 
@@ -11,12 +11,12 @@ export const AllUsersChat = () => {
     const messages = useSelector(getMessagesFromState);
 
     useEffect(() => {
-        dispatch(getMessages());
+        dispatch(getNewMessages())
     }, [dispatch])
 
     return <div>
         <div>
-            {messages.map(m => <Message message={m}/>)}
+            {messages.map((m, index) => <Message key={index} message={m}/>)}
         </div>
         <SendMessage />
     </div>

@@ -8,7 +8,7 @@ let ws;
 function cleanUp() {
     ws.removeEventListener("open", setWsStatus);
     ws.removeEventListener("message", setMessages);
-    ws.removeEventListener("close", setWsStatus);
+    ws.removeEventListener("close", reconnect);
 }
 
 function setWsStatus(status) {

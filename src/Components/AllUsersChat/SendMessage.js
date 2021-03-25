@@ -19,6 +19,6 @@ export const SendMessage = () => {
     return <div>
         <textarea value={message} onChange={(e) => setMessage(e.currentTarget.value)}>
         </textarea>
-        <button disabled={wsStatus === "pending" ? true : false} onClick={sendNewMessage}>Send</button>
+        <button disabled={wsStatus === "pending"} onClick={sendNewMessage}>Send</button>
     </div>
 }

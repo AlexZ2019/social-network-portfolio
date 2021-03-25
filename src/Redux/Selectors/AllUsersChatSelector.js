@@ -1,7 +1,7 @@
 export const getMessagesFromState = (state) => {
-    return state.AllUsersChatReducer.messages
+    return state.AllUsersChatSlice.messages
 }
 
 export const getWsStatusFromState = (state) => {
-    return state.AllUsersChatReducer.wsStatus
+    return state.AllUsersChatSlice.wsStatus
 }

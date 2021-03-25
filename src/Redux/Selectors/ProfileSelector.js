@@ -1,11 +1,11 @@
 export const getPostsFromState = (state) => {
-    return state.ProfileReducer.posts
+    return state.ProfileSlice.posts
 }
 
 export const getProfileFromState = (state) => {
-    return state.ProfileReducer.profile
+    return state.ProfileSlice.profile
 }
 
 export const getProfileStatusFromState = (state) => {
-    return state.ProfileReducer.profileStatus
+    return state.ProfileSlice.profileStatus
 }

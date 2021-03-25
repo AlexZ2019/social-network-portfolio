@@ -1,47 +1,29 @@
 import {allUsersChatApI} from "../../API/allUsersChatApI";
+import {createSlice} from "@reduxjs/toolkit";
 
-const GET_MESSAGES = "src/Redux/Reducers/AllUsersChat?Reducer/GET_MESSAGES";
-const SET_WS_STATUS =  "src/Redux/Reducers/AllUsersChat?Reducer/SET_WS_STATUS";
-
-let InitialState = {
+let initialState = {
     messages: [],
     wsStatus: ""
 }
 
-const AllUsersChatReducer = (state = InitialState, action) => {
-
-    switch (action.type) {
-        case GET_MESSAGES:
-            return {
-                ...state, messages: [...state.messages, ...action.messages]
-            }
-        case SET_WS_STATUS:
-            return {
-                ...state, wsStatus: action.wsStatus
-            }
-        default: return state
+const AllUsersChatSlice = createSlice({
+    name: "AllUsersChatSlice",
+    initialState,
+    reducers: {
+        getMessages: (state, action) => {
+            state.messages = [...state.messages, ...action.payload]
+        },
+        setWsStatus: (state, action) =>  {
+            state.wsStatus = action.payload
+        }
     }
-}
+})
 
-// Action creators
-
-const setMessage = (messages) => {
-    return {
-        type: GET_MESSAGES,
-        messages
-    }
-}
-
-const setWsStatus = (status) => {
-    return {
-        type: SET_WS_STATUS,
-        status
-    }
-}
+export const {getMessages, setWsStatus} = AllUsersChatSlice.actions
 
 const newMessageHandlerCreator = (dispatch) => {
     return (newMessages) => {
-        dispatch(setMessage(newMessages))
+        dispatch(getMessages(newMessages))
     }
 }
 
@@ -51,14 +33,14 @@ const newStatusHandlerCreator = (dispatch) => {
     }
 }
 
-export const getMessages = () => async dispatch => {
+export const getNewMessages = () => async dispatch => {
     allUsersChatApI.start();
     allUsersChatApI.subscribe("messages", newMessageHandlerCreator(dispatch));
     allUsersChatApI.subscribe("status", newStatusHandlerCreator(dispatch));
 }
 
-export const sendMessage = (message) => async dispatch => {
+export const sendMessage = (message) => () => {
     allUsersChatApI.sendMessage(message)
 }
 
-export default AllUsersChatReducer;
+export default AllUsersChatSlice.reducer;

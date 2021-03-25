@@ -1,11 +1,6 @@
 import {reset} from "redux-form";
 import {ProfileAPI} from "../../API/profileApI";
-
-const ADD_POST = "ProfileReducer/ADD_POST";
-const DELETE_POST = "ProfileReducer/DELETE_POST";
-const SET_PROFILE = "ProfileReducer/SET_PROFILE";
-const SET_PROFILE_STATUS = "ProfileReducer/SET_PROFILE_STATUS";
-const SAVE_PHOTO = "ProfileReducer/SAVE_PHOTO";
+import {createSlice} from "@reduxjs/toolkit";
 
 let initialState = {
     posts: [
@@ -24,77 +19,34 @@ let initialState = {
     profileStatus: null
 }
 
-const ProfileReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_POST: {
-            return {
-                ...state, posts: [{postId: state.posts.length + 2,post: action.newPost} ,...state.posts]
-                // postId: state.posts.length + 2 is temporary. It needs to be refactored
-            }
+const ProfileSlice = createSlice({
+    name: "ProfileSlice",
+    initialState,
+    reducers: {
+        addNewPost: (state, action) => {
+            state.posts = [{postId: state.posts.length + 2,post: action.payload} ,...state.posts]
+        },
+        deletePostSuccess: (state, action) => {
+            state.posts.filter(item => item.postId !== action.payload)
+        },
+        setProfile: (state, action) => {
+            state.profile = action.payload
+        },
+        setProfileStatus: (state, action) => {
+            state.profileStatus = action.payload
+        },
+        savePhotoSuccess: (state, action) => {
+            state.profile = {...state.profile, photos: action.payload}
         }
-        case DELETE_POST: {
-            return {
-                ...state, posts: state.posts.filter(item => item.postId !== action.postId)
-            }
-        }
-        case SET_PROFILE: {
-            return {
-                ...state, profile: action.profile
-            }
-        }
-        case SET_PROFILE_STATUS: {
-            return {
-                ...state, profileStatus: action.profileStatus
-            }
-        }
-        case SAVE_PHOTO: {
-            return {
-               ...state, profile: {...state.profile, photos: action.photos}
-            }
-        }
-
-        default:
-            return state
     }
-}
 
-// Action creators
-const addPostSuccess = (newPost) => {
-    return (
-        {type: ADD_POST, newPost}
-    )
-}
+})
 
-const deletePostSuccess = (postId) => {
-    return (
-        {type: DELETE_POST, postId}
-    )
-}
-
-const setProfile = (profile) => {
-    return {
-        type: SET_PROFILE,
-        profile
-    }
-}
-
-const setProfileStatus = profileStatus => {
-    return {
-        type: SET_PROFILE_STATUS,
-        profileStatus
-    }
-}
-
-const savePhotoSuccess = photos => {
-    return {
-        type: SAVE_PHOTO,
-        photos
-    }
-}
+export const {addNewPost, deletePostSuccess, setProfile, setProfileStatus, savePhotoSuccess} = ProfileSlice.actions
 
 //Thunk creators
 export const addPost = newPost => dispatch => {
-    dispatch(addPostSuccess(newPost));
+    dispatch(addNewPost(newPost));
     dispatch(reset("addNewPostForm"));
 }
 
@@ -134,4 +86,4 @@ export const saveProfile = profileData => async (dispatch, getState) => {
     }
 }
 
-export default ProfileReducer;
+export default ProfileSlice.reducer;
